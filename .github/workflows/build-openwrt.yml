@@ -21,7 +21,7 @@ on:
 
 env:
 #  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_URL: https://github.com/jacelift/lede
+  REPO_URL: https://github.com/jacelift/lede-jacelift
   REPO_BRANCH: master
 #  REPO_BRANCH: lede-17.01
   FEEDS_CONF: feeds.conf.default
