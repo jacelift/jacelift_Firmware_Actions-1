@@ -1,11 +1,11 @@
 RX_WT-600配置： 
 ```
-【cpu】： MediaTek MT7621AT
+【cpu】：MediaTek MT7621AT
 【RAM】：128MB
-【ROM】： 32MB（原厂为16MB）
-【2.4G】： MT7603EN
-【5G】： MT7612EN
-【面向端口布局】：L L L L W：MT7530，1000Mbps
+【ROM】：32MB（原厂为16MB）
+【2.4G】：MT7603EN
+【5G】：MT7612EN
+【面向端口布局】：L L L L W，MT7530，1000Mbps
 【USB端口】：USB2*1，USB3*1
 ```
 
