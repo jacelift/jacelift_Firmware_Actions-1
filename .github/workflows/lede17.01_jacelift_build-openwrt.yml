@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: lede17.01-jacelift_Build-OpenWrt
+name: lede17.01_jacelift_Build-OpenWrt
 
 on:
   repository_dispatch:
@@ -20,10 +20,10 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/jacelift/lede17.01-jacelift
+  REPO_URL: https://github.com/jacelift/lede17.01_jacelift
   REPO_BRANCH: lede-17.01
-  FEEDS_CONF: lede17.01-jacelift_feeds.conf.default
-  CONFIG_FILE: lede17.01-jacelift.config
+  FEEDS_CONF: lede17.01_jacelift_feeds.conf.default
+  CONFIG_FILE: lede17.01_jacelift.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
