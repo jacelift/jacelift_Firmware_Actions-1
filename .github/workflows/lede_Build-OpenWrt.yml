@@ -20,7 +20,7 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/jacelift/lede
   REPO_BRANCH: master
   FEEDS_CONF: lede_feeds.conf.default
   CONFIG_FILE: lede.config
