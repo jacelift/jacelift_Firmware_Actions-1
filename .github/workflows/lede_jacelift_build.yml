@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: lede_jacelift_Build-OpenWrt
+name: lede_jacelift_Build
 
 on:
   repository_dispatch:
