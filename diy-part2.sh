@@ -24,13 +24,13 @@ define Device/RX_WT600
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := RX
   DEVICE_MODEL := WT600
-  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 kmod-usb-storage kmod-usb-storage-extras \
-	kmod-usb-ledtrig-usbport -wpad-openssl
+  DEVICE_PACKAGES := kmod-mt76 kmod-usb2 kmod-usb3 kmod-usb-storage kmod-usb-storage-extras \
+	kmod-usb-ledtrig-usbport kmod-usb-ohci kmod-usb-ohci-pci kmod-usb-uhci kmod-usb-storage-uas -wpad-openssl
 endef
 TARGET_DEVICES += RX_WT600
 
 }
-sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 kmod-usb-storage kmod-usb-storage-extras \\\n	kmod-usb-ledtrig-usbport -wpad-openssl\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
+sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt76 kmod-usb2 kmod-usb3 kmod-usb-storage kmod-usb-storage-extras \\\n	kmod-usb-ledtrig-usbport kmod-usb-ohci kmod-usb-ohci-pci kmod-usb-uhci kmod-usb-storage-uas -wpad-openssl\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
 
 
 #【02】修改文件：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
