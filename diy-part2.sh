@@ -50,7 +50,7 @@ sed -i 's/d-team,newifi-d2/RX,WT600/g;s/Newifi-D2/WT600/g' target/linux/ramips/d
 
 
 # 更改openwrt的主机名为WT600，Modify hostname
-sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
+# sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
 
 
