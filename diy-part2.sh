@@ -30,7 +30,7 @@ endef
 TARGET_DEVICES += RX_WT600
 
 }
-sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603e kmod-mt76x2e kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport luci-app-mtwifi -wpad-openssl\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
+sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport -wpad-openssl\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
 
 
 #【02】修改文件：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
