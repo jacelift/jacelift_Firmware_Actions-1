@@ -49,8 +49,8 @@ cp -f target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts target/linux/ramips/dt
 sed -i 's/d-team,newifi-d2/RX,WT600/g;s/Newifi-D2/WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
 # ==========2022.6.10 test=========
 rm -r target/linux/ramips/dts/mt7621_RX_WT600.dts
-cp -f rx_wt600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
-cp -f rx_wt600/mt7621_RX_WT600.dts target/mt7621_RX_WT600.dts
+cp -f file/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+cp -f file/mt7621_RX_WT600.dts target/mt7621_RX_WT600.dts
 
 # 更改openwrt的主机名为WT600，Modify hostname
 # sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
