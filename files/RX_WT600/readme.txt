@@ -1,3 +1,4 @@
+https://github.com/siwind/openwrt
 make from zte e8820v2
 
 grep -irl "e8820v2" target/linux/
