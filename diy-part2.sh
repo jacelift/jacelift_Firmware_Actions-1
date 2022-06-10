@@ -47,6 +47,9 @@ sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-fil
 cp -f target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
 sed -i 's/d-team,newifi-d2/RX,WT600/g;s/Newifi-D2/WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
+# ==========2022.6.10 test=========
+rm -r target/linux/ramips/dts/mt7621_RX_WT600.dts
+cp -f ../rx_wt600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 
 
 # 更改openwrt的主机名为WT600，Modify hostname
