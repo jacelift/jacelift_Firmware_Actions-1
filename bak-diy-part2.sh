@@ -14,46 +14,54 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
 
-# 添加wt600机型到lede源码中2022.5.31
+# 添加wt600机型到lede源码中2022.6.12
+# lede_RX_WT600_2022.6.12 make from cudy_wr1300
 
 #【01】修改文件：add wt600 to target/linux/ramips/image/mt7621.mk
 wt600_mt7621.mk(){
 
+define Device/cudy_wr1300
+  $(Device/dsa-migration)
+  IMAGE_SIZE := 15872k
+  DEVICE_VENDOR := Cudy
+  DEVICE_MODEL := WR1300
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \
+	kmod-usb-ledtrig-usbport
+endef
+TARGET_DEVICES += cudy_wr1300
+
 define Device/RX_WT600
-  $(Device/uimage-lzma-loader)
+  $(Device/dsa-migration)
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := RX
   DEVICE_MODEL := WT600
-  DEVICE_PACKAGES := kmod-mt7603e kmod-mt76x2e kmod-usb2 kmod-usb3 \
-	kmod-usb-ledtrig-usbport luci-app-mtwifi -wpad-openssl
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \
+	kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += RX_WT600
 
 }
-sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport -wpad-openssl\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
+sed -i '/TARGET_DEVICES += cudy_wr1300/a\\ndefine Device\/RX_WT600\n  \$(Device\/dsa-migration)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport -wpad-openssl\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
 
 
 #【02】修改文件：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
-sed -i 's/d-team,newifi-d2/&|\\\nRX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+#sed -i 's/d-team,newifi-d2/&|\\\nRX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 
 
 #【03】修改文件：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
-sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+#sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
 
-#【03】新增文件并修改：cp target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
-cp -f target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+#【03】新增文件并修改：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+cp -f target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
-sed -i 's/d-team,newifi-d2/RX,WT600/g;s/Newifi-D2/WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
-# ==========2022.6.10 test=========
-rm -r target/linux/ramips/dts/mt7621_RX_WT600.dts
-cp -f files/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
-cp -f files/mt7621_RX_WT600.dts target/mt7621_RX_WT600.dts
+sed -i 's/cudy,wr1300/RX,WT600/g;s/Cudy WR1300/RX WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
+
 
 # 更改openwrt的主机名为WT600，Modify hostname
-# sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
 
 
