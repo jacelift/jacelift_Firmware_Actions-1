@@ -14,7 +14,7 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
 
-# 添加wt600机型到lede源码中2022.6.12
+# 添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.12
 # lede_RX_WT600_2022.6.12 make from cudy_wr1300
 
 #【01】修改文件：add wt600 to target/linux/ramips/image/mt7621.mk
