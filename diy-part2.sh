@@ -17,15 +17,15 @@
 # 添加wt600机型到lede源码中2022.6.11
 
 # ==========2022.6.11 test=========
-rm -r target/linux/ramips/image/mt7621.mk
-rm -r target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+# rm -r target/linux/ramips/image/mt7621.mk
+# rm -r target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 
-cp -f files/RX_WT600/mt7621.mk target/linux/ramips/image/mt7621.mk
-cp -f files/RX_WT600/01_leds target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
-cp -f files/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+# cp -f files/RX_WT600/mt7621.mk target/linux/ramips/image/mt7621.mk
+# cp -f files/RX_WT600/01_leds target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+# cp -f files/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 
 # 更改openwrt的主机名为WT600，Modify hostname
-sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
+# sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
 
 # sed -i '/xxxx定位需要的字符串xxx/a\xxx在定位字符串后面一行（换行）需要添加的字符串内容xxx' xx路径xx/xx文件xx.txt
