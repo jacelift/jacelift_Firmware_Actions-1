@@ -59,10 +59,13 @@ cp -f target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
 sed -i 's/cudy,wr1300/RX,WT600/g;s/Cudy WR1300/RX WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
 
-
 # 更改openwrt的主机名为WT600，Modify hostname
 sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
+
+# 【测试项】
+rm -r target/linux/ramips/dts/mt7621_lenovo_newifi-d1.dts
+cp -f files/RX_WT600/mt7621_lenovo_newifi-d1.dts target/linux/ramips/dts/mt7621_lenovo_newifi-d1.dts
 
 
 # sed -i '/xxxx定位需要的字符串xxx/a\xxx在定位字符串后面一行（换行）需要添加的字符串内容xxx' xx路径xx/xx文件xx.txt
