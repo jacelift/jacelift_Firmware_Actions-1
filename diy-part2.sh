@@ -46,13 +46,29 @@ sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(De
 
 
 #【02】修改文件01_leds：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+#==========================================
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
-sed -i 's/d-team,newifi-d2/&|\\\nRX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
-
+#例如：在1111之前添加AAA,方法如下：
+#sed -i 's/指定的字符/要插入的字符&/'  文件
+#[root@localhost ~]# sed -i  's/1111/AAA&/' /tmp/input.txt                     
+#[root@localhost ~]# cat /tmp/input.txt                   
+#null
+#0000AAA11112222
+#在1111之后添加BBB，方法如下：
+#sed -i 's/指定的字符/&要插入的字符/'  文件
+#[root@localhost ~]# sed -i  's/1111/&BBB/' /tmp/input.txt    
+#[root@localhost ~]# cat /tmp/input.txt                   
+#null
+#0000AAA1111BBB2222
+#==========================================
+#在指定字符后添加内容:sed -i 's/d-team,newifi-d2/&|\\\nRX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+#在指定字符前添加内容:
+sed -i 's/d-team,newifi-d2/RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 
 #【03】修改文件02_network：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
-#在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
-sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+#在指定字符前添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
+#sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+sed -i 's/d-team,newifi-d2/	RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
 #【04】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
