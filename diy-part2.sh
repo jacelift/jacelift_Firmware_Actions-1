@@ -14,24 +14,25 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
 
-# 添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.12
-# lede_RX_WT600_2022.6.12 make from cudy_wr1300
+# 添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.14
+# lede_RX_WT600_2022.6.14 make from cudy_wr1300 and newifi-d2
 
-#【01】修改文件：add wt600 to target/linux/ramips/image/mt7621.mk
+#【01】修改文件mt7621.mk：add wt600 to target/linux/ramips/image/mt7621.mk
 wt600_mt7621.mk(){
 
-define Device/cudy_wr1300
-  $(Device/dsa-migration)
-  IMAGE_SIZE := 15872k
-  DEVICE_VENDOR := Cudy
-  DEVICE_MODEL := WR1300
-  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \
-	kmod-usb-ledtrig-usbport
+define Device/d-team_newifi-d2
+  $(Device/uimage-lzma-loader)
+  IMAGE_SIZE := 32448k
+  DEVICE_VENDOR := Newifi
+  DEVICE_MODEL := D2
+  DEVICE_COMPAT_VERSION := 1.1
+  DEVICE_PACKAGES := kmod-mt7603e kmod-mt76x2e kmod-usb3 \
+	kmod-usb-ledtrig-usbport luci-app-mtwifi -wpad-openssl
 endef
-TARGET_DEVICES += cudy_wr1300
+TARGET_DEVICES += d-team_newifi-d2
 
 define Device/RX_WT600
-  $(Device/dsa-migration)
+  $(Device/uimage-lzma-loader)
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := RX
   DEVICE_MODEL := WT600
@@ -41,31 +42,31 @@ endef
 TARGET_DEVICES += RX_WT600
 
 }
-sed -i '/TARGET_DEVICES += cudy_wr1300/a\\ndefine Device\/RX_WT600\n  \$(Device\/dsa-migration)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport -wpad-openssl\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
+sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
 
 
-#【02】修改文件：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+#【02】修改文件01_leds：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
-#sed -i 's/d-team,newifi-d2/&|\\\nRX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+sed -i 's/d-team,newifi-d2/&|\\\nRX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 
 
-#【03】修改文件：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+#【03】修改文件02_network：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
-#sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
 
-#【03】新增文件并修改：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
-cp -f target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+#【03】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
-sed -i 's/cudy,wr1300/RX,WT600/g;s/Cudy WR1300/RX WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
+#sed -i 's/cudy,wr1300/RX,WT600/g;s/Cudy WR1300/RX WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
+cp -f files/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 
 # 更改openwrt的主机名为WT600，Modify hostname
 sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
 
 # 【测试项】
-rm -r target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
-cp -f files/RX_WT600/mt7621_d-team_newifi-d2.dts target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
+#rm -r target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
+#cp -f files/RX_WT600/mt7621_d-team_newifi-d2.dts target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
 
 
 # sed -i '/xxxx定位需要的字符串xxx/a\xxx在定位字符串后面一行（换行）需要添加的字符串内容xxx' xx路径xx/xx文件xx.txt
