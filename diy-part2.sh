@@ -64,8 +64,8 @@ sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
 
 # 【测试项】
-rm -r target/linux/ramips/dts/mt7621_lenovo_newifi-d1.dts
-cp -f files/RX_WT600/mt7621_lenovo_newifi-d1.dts target/linux/ramips/dts/mt7621_lenovo_newifi-d1.dts
+rm -r target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
+cp -f files/RX_WT600/mt7621_d-team_newifi-d2.dts target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
 
 
 # sed -i '/xxxx定位需要的字符串xxx/a\xxx在定位字符串后面一行（换行）需要添加的字符串内容xxx' xx路径xx/xx文件xx.txt
