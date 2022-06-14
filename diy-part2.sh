@@ -68,7 +68,7 @@ sed -i 's/d-team,newifi-d2/RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-file
 #【03】修改文件02_network：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 #在指定字符前添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
 #sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
-sed -i 's/d-team,newifi-d2/	RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+sed -i 's/	d-team,newifi-d2/	RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
 #【04】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
