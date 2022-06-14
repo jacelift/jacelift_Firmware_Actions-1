@@ -54,15 +54,16 @@ sed -i 's/d-team,newifi-d2/&|\\\nRX,WT600/' target/linux/ramips/mt7621/base-file
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
 sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
-
-#【03】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+#【04】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
 #sed -i 's/cudy,wr1300/RX,WT600/g;s/Cudy WR1300/RX WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
 cp -f files/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 
-# 更改openwrt的主机名为WT600，Modify hostname
+#【05】更改openwrt的主机名为WT600，Modify hostname
 sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
+#【06】删除files目录
+rm -r files
 
 # 【测试项】
 #rm -r target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
