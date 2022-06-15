@@ -55,7 +55,7 @@ ramips_setup_interfaces()
 		;;
 	RX,WT600)
 		ucidef_add_switch "switch0" \
-			"0:lan:4" "1:lan:3" "2:lan:2" "3:lan:1" "4:wan:5" "6@eth0"
+			"0:lan:1" "1:lan:2" "2:lan:3" "3:lan:4" "4:wan:5" "6@eth0"
 		ucidef_set_interface_lan "eth0.1 ra0 rai0"
 		;;
 	gehua,ghl-r-001)
