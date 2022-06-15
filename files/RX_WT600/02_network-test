@@ -48,8 +48,12 @@ ramips_setup_interfaces()
 		ucidef_set_interface_lan "eth0.1 ra0 rai0"
 		;;
 	d-team,newifi-d2|\
-	RX,WT600|\
 	raisecom,msg1500-x-00)
+		ucidef_add_switch "switch0" \
+			"3:lan:4" "2:lan:3" "1:lan:2" "0:lan:1" "4:wan:5" "6@eth0"
+		ucidef_set_interface_lan "eth0.1 ra0 rai0"
+		;;
+	RX,WT600)
 		ucidef_add_switch "switch0" \
 			"0:lan:4" "1:lan:3" "2:lan:2" "3:lan:1" "4:wan:5" "6@eth0"
 		ucidef_set_interface_lan "eth0.1 ra0 rai0"
