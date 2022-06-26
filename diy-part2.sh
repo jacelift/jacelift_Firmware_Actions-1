@@ -80,7 +80,8 @@ cp -f files/RX_WT600/02_network-test target/linux/ramips/mt7621/base-files/etc/b
 cp -f files/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 
 #【05】更改openwrt的主机名为WT600，Modify hostname
-sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
+#sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
 
 #【06】删除files目录
 rm -r files
