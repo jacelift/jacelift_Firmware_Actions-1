@@ -20,7 +20,7 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/jacelift/lede17.01_jacelift
+  REPO_URL: https://github.com/jacelift/lede17.01_jacelift_old
   REPO_BRANCH: lede-17.01
   FEEDS_CONF: lede17.01_jacelift_feeds.conf.default
   CONFIG_FILE: lede17.01_jacelift.config
