@@ -14,10 +14,10 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
 
-# 添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.14
+# 【1】添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.14
 # lede_RX_WT600_2022.6.14 make from cudy_wr1300 and newifi-d2
 
-#【01】修改文件mt7621.mk：add wt600 to target/linux/ramips/image/mt7621.mk
+#【1.1】修改文件mt7621.mk：add wt600 to target/linux/ramips/image/mt7621.mk
 wt600_mt7621.mk(){
 
 define Device/d-team_newifi-d2
@@ -45,7 +45,7 @@ TARGET_DEVICES += RX_WT600
 sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
 
 
-#【02】修改文件01_leds：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+#【1.2】修改文件01_leds：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 #==========================================
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
 #例如：在1111之前添加AAA,方法如下：
@@ -65,7 +65,7 @@ sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(De
 #在指定字符前添加内容:
 sed -i 's/d-team,newifi-d2/RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 
-#【03】修改文件02_network：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+#【1.3】修改文件02_network：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 #在指定字符前添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
 #sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 #===============【修正LAN口顺序】====================
@@ -74,21 +74,43 @@ cp -f files/RX_WT600/02_network-test target/linux/ramips/mt7621/base-files/etc/b
 #===============【修正LAN口顺序】====================
 #sed -i 's/	d-team,newifi-d2/	RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
-#【04】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+#【1.4】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
 #sed -i 's/cudy,wr1300/RX,WT600/g;s/Cudy WR1300/RX WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
 cp -f files/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 
-#【05】更改openwrt的主机名为WT600，Modify hostname
+#===================================================================================================
+
+#【2】添加机型tl-wdr5800-v1到lede17.01
+#添加机型tl-wdr5800-v1到lede17.01
+rm -rf target/linux/ar71xx/image/generic-tp-link.mk
+rm -rf target/linux/ar71xx/base-files/lib/ar71xx.sh
+rm -rf target/linux/ar71xx/base-files/lib/upgrade/platform.sh
+rm -rf target/linux/ar71xx/base-files/etc/diag.sh
+rm -rf target/linux/ar71xx/base-files/etc/board.d/02_network
+rm -rf target/linux/ar71xx/base-files/etc/board.d/01_leds
+rm -rf target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+rm -rf target/linux/ar71xx/base-files/etc/hotplug.d/ieee80211/10_fix_wifi_mac
+
+cp -f files/tl-wdr5800-v1_lede17.01/generic-tp-link.mk target/linux/ar71xx/image/generic-tp-link.mk
+cp -f files/tl-wdr5800-v1_lede17.01/ar71xx.sh target/linux/ar71xx/base-files/lib/ar71xx.sh
+cp -f files/tl-wdr5800-v1_lede17.01/platform.sh target/linux/ar71xx/base-files/lib/upgrade/platform.sh
+cp -f files/tl-wdr5800-v1_lede17.01/diag.sh target/linux/ar71xx/base-files/etc/diag.sh
+cp -f files/tl-wdr5800-v1_lede17.01/02_network target/linux/ar71xx/base-files/etc/board.d/02_network
+cp -f files/tl-wdr5800-v1_lede17.01/01_leds target/linux/ar71xx/base-files/etc/board.d/01_leds
+cp -f files/tl-wdr5800-v1_lede17.01/11-ath10k-caldata target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+cp -f files/tl-wdr5800-v1_lede17.01/10_fix_wifi_mac target/linux/ar71xx/base-files/etc/hotplug.d/ieee80211/10_fix_wifi_mac
+
+
+#【】更改openwrt的主机名为WT600，Modify hostname
 #sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
 
-#【06】删除files目录
+#【】删除files目录
 rm -r files
 
-# 【测试项】
-#rm -r target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
-#cp -f files/RX_WT600/mt7621_d-team_newifi-d2.dts target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
+
+
 
 
 # sed -i '/xxxx定位需要的字符串xxx/a\xxx在定位字符串后面一行（换行）需要添加的字符串内容xxx' xx路径xx/xx文件xx.txt
