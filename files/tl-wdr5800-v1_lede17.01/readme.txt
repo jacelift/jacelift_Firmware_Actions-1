@@ -1,3 +1,6 @@
+grep -irl "wdr6500" target/linux/*
+
+
 【新增wdr5800-v1】
 target/linux/ar71xx/image/generic-tp-link.mk
 target/linux/ar71xx/base-files/lib/ar71xx.sh
