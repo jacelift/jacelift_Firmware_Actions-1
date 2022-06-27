@@ -81,8 +81,9 @@ cp -f files/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600
 
 #===================================================================================================
 
-#【2】添加机型tl-wdr5800-v1到lede17.01
-#添加机型tl-wdr5800-v1到lede17.01
+#【2】添加机型tl-wdr5800-v1到lede17.01源码中，2022.6.27
+# 参照机型tl-wdr6500-v2修改。
+# 添加机型tl-wdr5800-v1到lede17.01
 rm -rf target/linux/ar71xx/image/generic-tp-link.mk
 rm -rf target/linux/ar71xx/base-files/lib/ar71xx.sh
 rm -rf target/linux/ar71xx/base-files/lib/upgrade/platform.sh
