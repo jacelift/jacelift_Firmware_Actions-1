@@ -17,31 +17,14 @@
 #===================================================================================================
 
 #【2】添加机型tl-wdr5800-v1到lede17.01
-#添加机型tl-wdr5800-v1到lede17.01
-rm -rf target/linux/ar71xx/image/generic-tp-link.mk
-rm -rf target/linux/ar71xx/base-files/lib/ar71xx.sh
-rm -rf target/linux/ar71xx/base-files/lib/upgrade/platform.sh
-rm -rf target/linux/ar71xx/base-files/etc/diag.sh
-rm -rf target/linux/ar71xx/base-files/etc/board.d/02_network
-rm -rf target/linux/ar71xx/base-files/etc/board.d/01_leds
-rm -rf target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
-rm -rf target/linux/ar71xx/base-files/etc/hotplug.d/ieee80211/10_fix_wifi_mac
-
-cp -f files/tl-wdr5800-v1_lede17.01/generic-tp-link.mk target/linux/ar71xx/image/generic-tp-link.mk
-cp -f files/tl-wdr5800-v1_lede17.01/ar71xx.sh target/linux/ar71xx/base-files/lib/ar71xx.sh
-cp -f files/tl-wdr5800-v1_lede17.01/platform.sh target/linux/ar71xx/base-files/lib/upgrade/platform.sh
-cp -f files/tl-wdr5800-v1_lede17.01/diag.sh target/linux/ar71xx/base-files/etc/diag.sh
-cp -f files/tl-wdr5800-v1_lede17.01/02_network target/linux/ar71xx/base-files/etc/board.d/02_network
-cp -f files/tl-wdr5800-v1_lede17.01/01_leds target/linux/ar71xx/base-files/etc/board.d/01_leds
-cp -f files/tl-wdr5800-v1_lede17.01/11-ath10k-caldata target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
-cp -f files/tl-wdr5800-v1_lede17.01/10_fix_wifi_mac target/linux/ar71xx/base-files/etc/hotplug.d/ieee80211/10_fix_wifi_mac
 
 
-#【】更改openwrt的主机名为WT600，Modify hostname
+
+#【3】更改openwrt的主机名，Modify hostname
 #sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
-sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
 
-#【】删除files目录
+
+#【4】删除files目录
 rm -r files
 
 
