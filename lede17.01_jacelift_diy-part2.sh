@@ -17,14 +17,47 @@
 #===================================================================================================
 
 #【2】添加机型tl-wdr5800-v1到lede17.01
+#参考wdr6500-v2添加机型tl-wdr5800-v1到lede17.01
+#【2.1】删除13个
+rm -rf target/linux/ar71xx/config-4.14
+rm -rf target/linux/ar71xx/generic/config-default
+rm -rf target/linux/ar71xx/config-4.9
+rm -rf target/linux/ar71xx/files/arch/mips/ath79/Makefile
+rm -rf target/linux/ar71xx/files/arch/mips/ath79/machtypes.h
+rm -rf target/linux/ar71xx/files/arch/mips/ath79/Kconfig.openwrt
+rm -rf target/linux/ar71xx/base-files/etc/board.d/02_network
+rm -rf target/linux/ar71xx/base-files/etc/board.d/01_leds
+rm -rf target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+rm -rf target/linux/ar71xx/base-files/etc/diag.sh
+rm -rf target/linux/ar71xx/base-files/lib/ar71xx.sh
+rm -rf target/linux/ar71xx/base-files/lib/upgrade/platform.sh
+rm -rf target/linux/ar71xx/image/generic-tp-link.mk
+
+#【2.2】复制14个
+cp -f files/lede17.01/tl-wdr5800-v1/config-4.14 target/linux/ar71xx/config-4.14
+cp -f files/lede17.01/tl-wdr5800-v1/config-default target/linux/ar71xx/generic/config-default
+cp -f files/lede17.01/tl-wdr5800-v1/config-4.9 target/linux/ar71xx/config-4.9
+cp -f files/lede17.01/tl-wdr5800-v1/Makefile target/linux/ar71xx/files/arch/mips/ath79/Makefile
+cp -f files/lede17.01/tl-wdr5800-v1/machtypes.h target/linux/ar71xx/files/arch/mips/ath79/machtypes.h
+cp -f files/lede17.01/tl-wdr5800-v1/Kconfig.openwrt target/linux/ar71xx/files/arch/mips/ath79/Kconfig.openwrt
+cp -f files/lede17.01/tl-wdr5800-v1/02_network target/linux/ar71xx/base-files/etc/board.d/02_network
+cp -f files/lede17.01/tl-wdr5800-v1/01_leds target/linux/ar71xx/base-files/etc/board.d/01_leds
+cp -f files/lede17.01/tl-wdr5800-v1/11-ath10k-caldata target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+cp -f files/lede17.01/tl-wdr5800-v1/diag.sh target/linux/ar71xx/base-files/etc/diag.sh
+cp -f files/lede17.01/tl-wdr5800-v1/ar71xx.sh target/linux/ar71xx/base-files/lib/ar71xx.sh
+cp -f files/lede17.01/tl-wdr5800-v1/platform.sh target/linux/ar71xx/base-files/lib/upgrade/platform.sh
+cp -f files/lede17.01/tl-wdr5800-v1/generic-tp-link.mk target/linux/ar71xx/image/generic-tp-link.mk
+cp -f files/lede17.01/tl-wdr5800-v1/mach-tl-wdr5800-v1.c target/linux/ar71xx/files/arch/mips/ath79/mach-tl-wdr5800-v1.c
+
+#【3】复制1个,修复丢失依赖库libcap.so.2
+rm -rf package/network/utils/iproute2/Makefile
+cp -f files/lede17.01/Makefile package/network/utils/iproute2/Makefile
 
 
+#【4】更改openwrt的主机名，Modify hostname
+sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
 
-#【3】更改openwrt的主机名，Modify hostname
-#sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
-
-
-#【4】删除files目录
+#【5】删除files目录
 rm -r files
 
 
