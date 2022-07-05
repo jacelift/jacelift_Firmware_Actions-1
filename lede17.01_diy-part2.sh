@@ -62,7 +62,7 @@ cp -f files/lede17.01/Makefile package/network/utils/iproute2/Makefile
 sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
 
 #【5】删除files目录
-rm -r files
+#rm -r files
 
 
 
