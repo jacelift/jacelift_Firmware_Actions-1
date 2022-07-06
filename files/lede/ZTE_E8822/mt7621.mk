@@ -478,7 +478,6 @@ endef
 TARGET_DEVICES += RX_WT600
 
 define Device/zte_e8822
-  $(Device/dsa-migration)
   $(Device/uimage-lzma-loader)
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := ZTE
