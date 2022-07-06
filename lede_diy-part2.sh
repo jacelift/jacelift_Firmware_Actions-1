@@ -10,15 +10,15 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-# Modify default IP
+# 【1】修改默认IP地址，Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
 
-# 【1】添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.14
-# lede_RX_WT600_2022.6.14 make from cudy_wr1300 and newifi-d2
+# 【2】===========START 添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.14===============
+# make from cudy_wr1300 and newifi-d2
 chmod 755 -R files/*
 
-#【1.1】修改文件mt7621.mk：add wt600 to target/linux/ramips/image/mt7621.mk
+#【2.1】修改文件mt7621.mk：add wt600 to target/linux/ramips/image/mt7621.mk
 wt600_mt7621.mk(){
 
 define Device/d-team_newifi-d2
@@ -46,7 +46,7 @@ TARGET_DEVICES += RX_WT600
 sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(Device\/uimage-lzma-loader)\n  IMAGE_SIZE := 32448k\n  DEVICE_VENDOR := RX\n  DEVICE_MODEL := WT600\n  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb2 kmod-usb3 \\\n	kmod-usb-ledtrig-usbport\nendef\nTARGET_DEVICES += RX_WT600' target/linux/ramips/image/mt7621.mk
 
 
-#【1.2】修改文件01_leds：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+#【2.2】修改文件01_leds：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 #==========================================
 #在指定字符前后添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
 #例如：在1111之前添加AAA,方法如下：
@@ -66,7 +66,7 @@ sed -i '/TARGET_DEVICES += d-team_newifi-d2/a\\ndefine Device\/RX_WT600\n  \$(De
 #在指定字符前添加内容:
 sed -i 's/d-team,newifi-d2/RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 
-#【1.3】修改文件02_network：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+#【2.3】修改文件02_network：add wt600 to target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 #在指定字符前添加内容：https://www.cnblogs.com/bulh/articles/11071783.html
 #sed -i 's/d-team,newifi-d2/&|\\\n	RX,WT600/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 #===============【修正LAN口顺序】====================
@@ -75,18 +75,41 @@ cp -f files/RX_WT600/02_network-test target/linux/ramips/mt7621/base-files/etc/b
 #===============【修正LAN口顺序】====================
 #sed -i 's/	d-team,newifi-d2/	RX,WT600|\\\n&/' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
-#【1.4】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+#【2.4】新增文件并修改mt7621_RX_WT600.dts：cp target/linux/ramips/dts/mt7621_cudy_wr1300.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
 #sed替换字符串操作，多个替换可以在同一条命令中执行,用分号隔开即可“;”。
 #sed -i 's/cudy,wr1300/RX,WT600/g;s/Cudy WR1300/RX WT600/g' target/linux/ramips/dts/mt7621_RX_WT600.dts
 cp -f files/lede/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+# 【2】===========END 添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.14===============
 
-#===================================================================================================
 
 
-#【2】更改openwrt的主机名为WT600，Modify hostname
-sed -i 's/OpenWrt/WT600/g' package/base-files/files/bin/config_generate
 
-#【3】删除files目录
+
+# 【3】===========START 添加ZTE_E8822机型到lede源码（不依赖luci-app-mt-wifi）2022.7.6===============
+# 参考https://github.com/siwind/openwrt openwrt的zte_e8820-v2
+chmod 755 -R files/*
+
+# 【3.1】删除原有文件个
+rm -rf target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+rm -rf target/linux/ramips/image/mt7621.mk
+
+# 【3.2】拷贝ZTE_E8822相关文件个
+cp -f files/lede/ZTE_E8822/01_leds target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+cp -f files/lede/ZTE_E8822/mt7621.mk target/linux/ramips/image/mt7621.mk
+cp -f files/lede/ZTE_E8822/mt7621_zte_e8822.dts target/linux/ramips/dts/mt7621_zte_e8822.dts
+# 【3】===========END 添加ZTE_E8822机型到lede源码（不依赖luci-app-mt-wifi）2022.7.6===============
+
+
+
+
+
+
+#【99】更改openwrt的主机名，Modify hostname
+#sed -i 's/OpenWrt/RX_WT600/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/ZTE_E8822/g' package/base-files/files/bin/config_generate
+
+
+#【100】删除files目录
 rm -r files
 
 
