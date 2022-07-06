@@ -16,6 +16,7 @@
 
 # 【1】添加wt600机型到lede源码中（不依赖luci-app-mt-wifi）2022.6.14
 # lede_RX_WT600_2022.6.14 make from cudy_wr1300 and newifi-d2
+chmod 755 -R files/*
 
 #【1.1】修改文件mt7621.mk：add wt600 to target/linux/ramips/image/mt7621.mk
 wt600_mt7621.mk(){
