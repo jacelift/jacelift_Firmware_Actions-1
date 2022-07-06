@@ -37,8 +37,7 @@ rm -rf target/linux/ar71xx/image/generic-tp-link.mk
 rm -rf package/network/utils/iproute2/Makefile
 
 # 【2.2】拷贝tl-wdr5800-v1相关文件14个
-chmod 755 -R files/lede17.01/*
-chmod 755 -R files/lede17.01/tl-wdr5800-v1/*
+chmod 755 -R files/*
 #======================
 cp -f files/lede17.01/tl-wdr5800-v1/config-4.14 target/linux/ar71xx/config-4.14
 cp -f files/lede17.01/tl-wdr5800-v1/config-default target/linux/ar71xx/generic/config-default
