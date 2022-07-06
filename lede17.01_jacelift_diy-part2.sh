@@ -23,13 +23,14 @@
 
 
 #【2.2】复制14个
+chmod 755 -R files/*
 
 
 #【3】复制1个,修复丢失依赖库libcap.so.2
 
 
 #【4】更改openwrt的主机名，Modify hostname
-sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
+#sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
 
 #【5】删除files目录
 rm -r files
