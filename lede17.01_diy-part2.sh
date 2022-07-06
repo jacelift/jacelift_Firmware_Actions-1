@@ -37,6 +37,9 @@ rm -rf target/linux/ar71xx/image/generic-tp-link.mk
 rm -rf package/network/utils/iproute2/Makefile
 
 # 【2.2】拷贝tl-wdr5800-v1相关文件14个
+chmod 755 -R files/lede17.01/*
+chmod 755 -R files/lede17.01/tl-wdr5800-v1/*
+#======================
 cp -f files/lede17.01/tl-wdr5800-v1/config-4.14 target/linux/ar71xx/config-4.14
 cp -f files/lede17.01/tl-wdr5800-v1/config-default target/linux/ar71xx/generic/config-default
 cp -f files/lede17.01/tl-wdr5800-v1/config-4.9 target/linux/ar71xx/config-4.9
@@ -51,25 +54,10 @@ cp -f files/lede17.01/tl-wdr5800-v1/diag.sh target/linux/ar71xx/base-files/etc/d
 cp -f files/lede17.01/tl-wdr5800-v1/ar71xx.sh target/linux/ar71xx/base-files/lib/ar71xx.sh
 cp -f files/lede17.01/tl-wdr5800-v1/platform.sh target/linux/ar71xx/base-files/lib/upgrade/platform.sh
 cp -f files/lede17.01/tl-wdr5800-v1/generic-tp-link.mk target/linux/ar71xx/image/generic-tp-link.mk
-# ===============
-touch target/linux/ar71xx/config-4.14
-touch target/linux/ar71xx/generic/config-default
-touch target/linux/ar71xx/config-4.9
-touch target/linux/ar71xx/files/arch/mips/ath79/Makefile
-touch target/linux/ar71xx/files/arch/mips/ath79/mach-tl-wdr5800-v1.c
-touch target/linux/ar71xx/files/arch/mips/ath79/machtypes.h
-touch target/linux/ar71xx/files/arch/mips/ath79/Kconfig.openwrt
-touch target/linux/ar71xx/base-files/etc/board.d/02_network
-touch target/linux/ar71xx/base-files/etc/board.d/01_leds
-touch target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
-touch target/linux/ar71xx/base-files/etc/diag.sh
-touch target/linux/ar71xx/base-files/lib/ar71xx.sh
-touch target/linux/ar71xx/base-files/lib/upgrade/platform.sh
-touch target/linux/ar71xx/image/generic-tp-link.mk
+
 
 # 【bug1.1】
 cp -f files/lede17.01/Makefile package/network/utils/iproute2/Makefile
-touch package/network/utils/iproute2/Makefile
 
 # ==============End 添加tl-wdr5800-v1机型到lede17.01源码==================
 
