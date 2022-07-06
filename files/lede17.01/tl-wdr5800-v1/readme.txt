@@ -32,7 +32,7 @@ rm -rf target/linux/ar71xx/base-files/lib/upgrade/platform.sh
 rm -rf target/linux/ar71xx/image/generic-tp-link.mk
 
 # 【bug1】解决编译报错提示缺少依赖库libcap.so.2的问题
-#make menuconfig——libraries：选中libcap
+# make menuconfig——libraries：选中libcap
 rm -rf package/network/utils/iproute2/Makefile
 
 # 【2.2】拷贝tl-wdr5800-v1相关文件14个
