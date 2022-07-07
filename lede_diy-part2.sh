@@ -98,7 +98,7 @@ rm -rf target/linux/ramips/image/mt7621.mk
 cp -f files/lede/ZTE_E8822/01_leds target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 cp -f files/lede/ZTE_E8822/02_network target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 cp -f files/lede/ZTE_E8822/mt7621.mk target/linux/ramips/image/mt7621.mk
-cp -f files/lede/ZTE_E8822/mt7621_zte_e8822.dts target/linux/ramips/dts/mt7621_zte_e8822.dts
+cp -f files/lede/ZTE_E8822/mt7621_ZTE_E8822.dts target/linux/ramips/dts/mt7621_ZTE_E8822.dts
 # 【3】===========END 添加ZTE_E8822机型到lede源码（不依赖luci-app-mt-wifi）2022.7.6===============
 
 
