@@ -9,12 +9,20 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
+# kmod-fs-antfs与ntfs-3g冲突，二选一，否则编译失败
+# sfe与flowoffload是同一个，一个是旧版另一个是新版
+# 
 
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
-
 #===================================================================================================
+# 【bug1】解决编译报错提示缺少依赖库libcap.so.2的问题
+rm -rf package/network/utils/iproute2/Makefile
+chmod 755 -R files/*
+# 【bug1.1】
+cp -f files/lede17.01/Makefile package/network/utils/iproute2/Makefile
+
 
 # 【2】===========Start 添加tl-wdr5800-v1机型到lede17.01源码2022.7.5===============
 # 参考tl-wdr6500-v2机型
@@ -33,12 +41,7 @@ rm -rf target/linux/ar71xx/base-files/lib/ar71xx.sh
 rm -rf target/linux/ar71xx/base-files/lib/upgrade/platform.sh
 rm -rf target/linux/ar71xx/image/generic-tp-link.mk
 
-# 【bug1】解决编译报错提示缺少依赖库libcap.so.2的问题
-rm -rf package/network/utils/iproute2/Makefile
-
 # 【2.2】拷贝tl-wdr5800-v1相关文件14个
-chmod 755 -R files/*
-#======================
 cp -f files/lede17.01/tl-wdr5800-v1/config-4.14 target/linux/ar71xx/config-4.14
 cp -f files/lede17.01/tl-wdr5800-v1/config-default target/linux/ar71xx/generic/config-default
 cp -f files/lede17.01/tl-wdr5800-v1/config-4.9 target/linux/ar71xx/config-4.9
@@ -53,16 +56,33 @@ cp -f files/lede17.01/tl-wdr5800-v1/diag.sh target/linux/ar71xx/base-files/etc/d
 cp -f files/lede17.01/tl-wdr5800-v1/ar71xx.sh target/linux/ar71xx/base-files/lib/ar71xx.sh
 cp -f files/lede17.01/tl-wdr5800-v1/platform.sh target/linux/ar71xx/base-files/lib/upgrade/platform.sh
 cp -f files/lede17.01/tl-wdr5800-v1/generic-tp-link.mk target/linux/ar71xx/image/generic-tp-link.mk
-
-
-# 【bug1.1】
-cp -f files/lede17.01/Makefile package/network/utils/iproute2/Makefile
-
 # ==============End 添加tl-wdr5800-v1机型到lede17.01源码==================
 
 
+
+
+# 【3】===========Start 添加ZTE_E8822机型到lede17.01源码2022.7.9===============
+# 参考YouHua_WR1200JS机型，参考d2的修正LAN顺序。
+# 【3.1】删除原有文件3个
+rm -rf target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+rm -rf target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+rm -rf target/linux/ramips/image/mt7621.mk
+
+# 【3.2】拷贝ZTE_E8822相关文件4个
+cp -f files/lede17.01/ZTE_E8822/02_network target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+cp -f files/lede17.01/ZTE_E8822/01_leds target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+cp -f files/lede17.01/ZTE_E8822/mt7621.mk target/linux/ramips/image/mt7621.mk
+cp -f files/lede17.01/ZTE_E8822/mt7621_ZTE_E8822.dts target/linux/ramips/dts/mt7621_ZTE_E8822.dts
+# ==============End 添加ZTE_E8822机型到lede17.01源码2022.7.9===============
+
+
+
+
+
+
 #【4】更改openwrt的主机名，Modify hostname
-sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
+#sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/ZTE_E8822/g' package/base-files/files/bin/config_generate
 
 #【5】删除files目录
 rm -r files
