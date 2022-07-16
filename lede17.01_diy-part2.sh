@@ -85,10 +85,8 @@ cp -f files/lede17.01/ZTE_E8822/mt7621_ZTE_E8822.dts target/linux/ramips/dts/mt7
 sed -i 's/OpenWrt/ZTE_E8822/g' package/base-files/files/bin/config_generate
 
 #【5】删除files目录
-#rm -r files
-rm -r files/lede
-rm -r files/lede17.01
-rm -r files/zte_e8820v2
+rm -r files
+
 
 
 
