@@ -26,7 +26,7 @@ cp -f files/lede17.01/Makefile package/network/utils/iproute2/Makefile
 
 # 【2】===========Start 添加tl-wdr5800-v1机型到lede17.01源码2022.7.5===============
 # 参考tl-wdr6500-v2机型
-# 【2.1】删除原有文件13个
+# 2.1 删除原有文件13个
 rm -rf target/linux/ar71xx/config-4.14
 rm -rf target/linux/ar71xx/generic/config-default
 rm -rf target/linux/ar71xx/config-4.9
@@ -41,7 +41,7 @@ rm -rf target/linux/ar71xx/base-files/lib/ar71xx.sh
 rm -rf target/linux/ar71xx/base-files/lib/upgrade/platform.sh
 rm -rf target/linux/ar71xx/image/generic-tp-link.mk
 
-# 【2.2】拷贝tl-wdr5800-v1相关文件14个
+# 2.2 拷贝tl-wdr5800-v1相关文件14个
 cp -f files/lede17.01/tl-wdr5800-v1/config-4.14 target/linux/ar71xx/config-4.14
 cp -f files/lede17.01/tl-wdr5800-v1/config-default target/linux/ar71xx/generic/config-default
 cp -f files/lede17.01/tl-wdr5800-v1/config-4.9 target/linux/ar71xx/config-4.9
@@ -63,12 +63,12 @@ cp -f files/lede17.01/tl-wdr5800-v1/generic-tp-link.mk target/linux/ar71xx/image
 
 # 【3】===========Start 添加ZTE_E8822机型到lede17.01源码2022.7.9===============
 # 参考YouHua_WR1200JS机型，参考d2的修正LAN顺序。
-# 【3.1】删除原有文件3个
+# 3.1 删除原有文件3个
 rm -rf target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 rm -rf target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 rm -rf target/linux/ramips/image/mt7621.mk
 
-# 【3.2】拷贝ZTE_E8822相关文件4个
+# 3.2 拷贝ZTE_E8822相关文件4个
 cp -f files/lede17.01/ZTE_E8822/02_network target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 cp -f files/lede17.01/ZTE_E8822/01_leds target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
 cp -f files/lede17.01/ZTE_E8822/mt7621.mk target/linux/ramips/image/mt7621.mk
@@ -78,13 +78,30 @@ cp -f files/lede17.01/ZTE_E8822/mt7621_ZTE_E8822.dts target/linux/ramips/dts/mt7
 
 
 
+# 【4】===========Start 添加RX_WT600机型到lede17.01源码2022.7.17===============
+# 参考YouHua_WR1200JS机型，参考d2的修正LAN顺序（与ZTE_E8822通用）。
+# 4.1 删除原有文件3个
+rm -rf target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+rm -rf target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+rm -rf target/linux/ramips/image/mt7621.mk
+
+# 4.2 拷贝ZTE_E8822相关文件4个
+cp -f files/lede17.01/RX_WT600/02_network target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+cp -f files/lede17.01/RX_WT600/01_leds target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+cp -f files/lede17.01/RX_WT600/mt7621.mk target/linux/ramips/image/mt7621.mk
+cp -f files/lede17.01/RX_WT600/mt7621_RX_WT600.dts target/linux/ramips/dts/mt7621_RX_WT600.dts
+# ===========End 添加RX_WT600机型到lede17.01源码2022.7.17======================
 
 
-#【4】更改openwrt的主机名，Modify hostname
+
+
+
+#【99】更改openwrt的主机名，Modify hostname
 #sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
-sed -i 's/OpenWrt/ZTE_E8822/g' package/base-files/files/bin/config_generate
+#sed -i 's/OpenWrt/ZTE_E8822/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/RX_WT600/g' package/base-files/files/bin/config_generate
 
-#【5】删除files目录
+#【100】删除files目录
 rm -r files
 
 
