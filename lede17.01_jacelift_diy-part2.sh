@@ -13,25 +13,19 @@
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
+# 设置权限
+chmod 755 -R files/*
 
 #===================================================================================================
 
-#【2】添加机型tl-wdr5800-v1到lede17.01
-#参考wdr6500-v2添加机型tl-wdr5800-v1到lede17.01
-#【2.1】删除13个
 
 
 
-#【2.2】复制14个
-chmod 755 -R files/*
-
-
-#【3】复制1个,修复丢失依赖库libcap.so.2
 
 
 #【4】更改openwrt的主机名，Modify hostname
 #sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
-sed -i 's/OpenWrt/ZTE_E8822/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/RX_WT600/g' package/base-files/files/bin/config_generate
 
 #【5】删除files目录
 rm -r files
