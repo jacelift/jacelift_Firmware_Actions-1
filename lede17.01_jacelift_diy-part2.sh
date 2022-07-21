@@ -25,7 +25,8 @@ chmod 755 -R files/*
 
 #【4】更改openwrt的主机名，Modify hostname
 #sed -i 's/OpenWrt/TL-WDR5800-V1/g' package/base-files/files/bin/config_generate
-sed -i 's/OpenWrt/RX_WT600/g' package/base-files/files/bin/config_generate
+#sed -i 's/OpenWrt/RX_WT600/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/NETGEAR_WNDR4300-V1/g' package/base-files/files/bin/config_generate
 
 #【5】删除files目录
 rm -r files
